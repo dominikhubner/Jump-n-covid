@@ -11,12 +11,15 @@ var xHum = canvas.height -20;
 var yHum = canvas.width/2;
 var dxHum = 1;
 
+//Score
+var score=0;
+
 //event Handler
 var spacePressed = false;
-document.addEventListener("keydown",keyDownHandler,false);
+document.addEventListener("keyup",keyDownHandler,false);
 
 function keyDownHandler(e){
-    if(e.keyCode === 32){
+    if(e.keyCode === 32 && xHum === canvas.height - 20){
         spacePressed=true;
     }
 }
@@ -40,19 +43,22 @@ function drawVirus() {
     ctx.closePath();
 }
 
-function score() {
+function updateScore() {
     //TODO count score
+    score+=1;
+    document.getElementById("score").innerHTML="Score is " + score;
 }
 function collision() {
-    //TODO detect if human touches virus
+    //detect if human touches virus
     if((yHum > x-1 && yHum < x+21 && xHum+20> y)||(yHum+20 > x && yHum+20 < x+20 && xHum+20> y)){
-        console.log("Collision at " + x + " " + yHum);
+      // console.log("Collision at " + x + " " + yHum);
+      document.getElementById("label").innerText="Game Over";
         clearInterval(timer)
     }
 }
-var speed = 10;
+var speed = 5;
 function faster() {
-    //TODO make game faster with every point
+    //make game faster with every point
     clearInterval(timer)
     speed *=0.9
     timer = setInterval(draw, speed);
@@ -86,7 +92,8 @@ function draw() {
     }
     //Speed up
     if (x + dx < 0) {
-        faster()
+        faster();
+        updateScore();
     }
     //Checks Collision
     collision();
@@ -95,7 +102,7 @@ function draw() {
     drawHuman();
 
     //checks if spacebar is pressed and goes up and down
-    if(spacePressed){
+    if(spacePressed  ){
         jumpHeight=90;
         spacePressed=false;
         goingUp = true;
@@ -108,7 +115,6 @@ function draw() {
 
     //change x value => change pos of Virus
     x -= dx;
-
 }
 
 
