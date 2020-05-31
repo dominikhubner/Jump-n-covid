@@ -53,6 +53,7 @@ function collision() {
     if((yHum > x-1 && yHum < x+21 && xHum+20> y)||(yHum+20 > x && yHum+20 < x+20 && xHum+20> y)){
       // console.log("Collision at " + x + " " + yHum);
       document.getElementById("label").innerText="Game Over";
+      document.querySelector("#message").textContent="TRY AGAIN!!";
         clearInterval(timer)
     }
 }
