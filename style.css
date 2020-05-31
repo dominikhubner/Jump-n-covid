@@ -33,3 +33,12 @@ h2{
   padding:20px 0;
 
 }
+#stripe{
+  background: white;
+  height:30px;
+  text-align: center;
+}
+#message{
+  display: inline-block;
+  width:20%;
+}
