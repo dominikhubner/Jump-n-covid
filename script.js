@@ -122,3 +122,17 @@ function draw() {
 
 //calls draw ever 10 mil.secs
 timer = setInterval(draw, speed);
+
+
+var requestOptions = {
+    method: 'GET',
+    headers : {
+        'Global':
+            'TotalConfirmed',
+    }
+};
+
+fetch("https://api.covid19api.com/summary", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
